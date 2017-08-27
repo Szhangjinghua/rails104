@@ -6,6 +6,7 @@ before_action :find_group_and_check_permission, only: [:edit, :update, :destroy]
   end
   def show
    @group = Group.find(params[:id])
+   @posts = @group.posts.recent
  end
  def edit
   end
@@ -34,10 +35,6 @@ before_action :find_group_and_check_permission, only: [:edit, :update, :destroy]
 
     @group.destroy
     redirect_to groups_path, alert: "Group deleted"
-  end
- def show
-    @group = Group.find(params[:id])
-    @posts = @group.posts.order("created_at DESC")
   end
 
  private
